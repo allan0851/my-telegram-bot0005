@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 # 获取并验证token
 token = os.getenv("BOT_TOKEN")
-ADMIN_IDS = []
+ADMIN_IDS = [int(id) for id in os.getenv("ADMIN_USER_IDS", "").split(",") if id]
 
 # 全局数据结构
 orders_db = {}  # {chat_id: order_info}
@@ -69,7 +69,6 @@ def admin_required(func):
         user_id = update.effective_user.id
         chat_id = update.effective_chat.id
 
-        ADMIN_IDS = [12345678]  # 替换为实际管理员ID
 
         if user_id not in ADMIN_IDS:
             await update.message.reply_text("⚠️ 此命令需要管理员权限")
