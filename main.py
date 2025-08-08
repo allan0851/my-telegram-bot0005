@@ -239,7 +239,6 @@ async def handle_amount_operation(update: Update, context: ContextTypes.DEFAULT_
 
     # 检查是否有订单
     if chat_id not in orders_db:
-        await update.message.reply_text("本群没有订单，请先创建订单")
         return
 
     order = orders_db[chat_id]
